@@ -1,3 +1,9 @@
+/*
+ * Author: Matthew Tan
+ * Course: COMP-003B: ASP.NET Core
+ * Instructor: Jonathan Cruz
+ * Purpose: Final project synthesizing MVC, Web API, EF Core, and middleware
+ */
 namespace COMP003B.SP25.FinalProject.TanM
 {
     public class Program
