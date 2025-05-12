@@ -44,7 +44,36 @@
     </dl>
 </div>
 
-<!-- Display-->
+<!-- Display all of the places for the client -->
+<div class="col-md-4"
+    <h4>Places</h4>
+    <ul>
+        @foreach (Place place in ViewBag.Places)
+        {
+            <li>@place.Name</li>
+        }
+    </ul>
+</div>
+<!-- Display all of the fees for the client -->
+<div class="col-md-4">
+    <h4>Fees</h4>
+    <ul>
+        @foreach (Fee fee in ViewBag.Fees)
+        {
+            <li>@fee.TotalDue</li>
+        }
+    </ul>
+</div>
+<!-- Display all bookings for the client -->
+<div class="col-md-4">
+    <h4>Bookings</h4>
+    <ul>
+        @foreach (Booking booking in ViewBag.Bookings)
+        {
+            <li>@booking.ResidencyAddress</li>
+        }
+    </ul>
+</div>
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ClientId">Edit</a> |
