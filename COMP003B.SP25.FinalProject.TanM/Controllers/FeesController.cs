@@ -39,6 +39,12 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
             {
                 return NotFound();
             }
+            // Get all clients assigned a fee
+            ViewBag.Clients = from c in _context.Clients
+                              join i in _context.Itinerarys on c.ClientId equals i.ClientId
+                              join f in _context.Fees on i.FeeId equals f.FeeId
+                              where f.FeeId == id
+                              select c;
 
             return View(fee);
         }

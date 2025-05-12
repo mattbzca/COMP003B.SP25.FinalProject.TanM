@@ -39,7 +39,13 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
             {
                 return NotFound();
             }
-
+            // Get all clients with a booking
+            ViewBag.Clients = from c in _context.Clients
+                              join i in _context.Itinerarys on c.ClientId equals i.ClientId
+                              join b in _context.Bookings on i.BookingId equals b.BookingId
+                              where b.BookingId == id
+                              select c;
+         
             return View(booking);
         }
 

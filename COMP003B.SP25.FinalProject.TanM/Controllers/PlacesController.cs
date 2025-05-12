@@ -39,6 +39,12 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
             {
                 return NotFound();
             }
+            // Get all clients with a place in their itinerary
+            ViewBag.Clients = from c in _context.Clients
+                              join i in _context.Itinerarys on c.ClientId equals i.ClientId
+                              join p in _context.Places on i.PlaceId equals p.PlaceId
+                              where p.PlaceId == id
+                              select c;
 
             return View(place);
         }

@@ -40,6 +40,23 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
                 return NotFound();
             }
 
+            //Get the Places, Fees, and Bookings that the Client is associated with respective of their itinerary.
+            ViewBag.Places = from c in _context.Clients
+                             join i in _context.Itinerarys on c.ClientId equals i.ClientId
+                             join p in _context.Places on i.PlaceId equals p.PlaceId
+                             where c.ClientId == id
+                             select p;
+            ViewBag.Fees = from c in _context.Clients
+                           join i in _context.Itinerarys on c.ClientId equals i.ClientId
+                           join f in _context.Fees on i.FeeId equals f.FeeId
+                           where c.ClientId == id
+                           select f;
+            ViewBag.Bookings = from c in _context.Clients
+                               join i in _context.Itinerarys on c.ClientId equals i.ClientId
+                               join b in _context.Bookings on i.BookingId equals b.BookingId
+                               where c.ClientId == id
+                               select b;
+
             return View(client);
         }
 
