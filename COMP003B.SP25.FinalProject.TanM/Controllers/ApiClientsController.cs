@@ -18,11 +18,19 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
         }
 
         // GET: api/clients, retrieving all clients
+        // Added [FromQuery] to bind from a query, that is clientMatch.
         [HttpGet]
-        public async Task<ActionResult<List<Client>>> GetClients()
+        public async Task<ActionResult<List<Client>>> GetClients([FromQuery] string? name)
         {
-            //returns all clients from asynced ApplicationDbContext
-            return Ok(await _context.Clients.ToListAsync());
+            // clientMatch definition
+            var clientMatch = _context.Clients.AsQueryable();
+            // Prepares matching for client names
+            if (!string.IsNullOrEmpty(name))
+            {
+                clientMatch = clientMatch.Where(c => c.Name.Contains(name));
+            }
+            // returns all clients from asynced ApplicationDbContext based on return of the matched client.
+            return Ok(await clientMatch.ToListAsync());
         }
         // GET: api/clients/{id}, retrieving a specific client by its ID.
         // Added route constraint {id:int} to enforce integers for client ID's.
@@ -40,9 +48,16 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
             return Ok(client);
         }
         // POST: api/clients, with endpoint creating a new client
+        // Added model binding by using [FromForm] to bind to client, and using validation.
         [HttpPost]
-        public async Task<ActionResult<Client>> CreateClient(Client client)
+        public async Task<ActionResult<Client>> CreateClient([FromForm]Client client)
         {
+            // Validation using ModelState
+            if (!ModelState.IsValid)
+            {
+                // Returns a 400 response if validation fails
+                return BadRequest(ModelState);
+            }
             // Client is added to the database and saved via async
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
@@ -94,15 +109,19 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
             return Ok(filteredClients);
         }
         // GET: api/clients/names, with endpoint retrieving a list of client names. 
-        [HttpGet("names")]
-        public async Task<ActionResult<List<string>>> GetClientNames()
+        // Added [FromRoute] to bind from a Route, which also validates a client's initials with their name for retrieval.
+        [HttpGet("{firstinitial}")]
+        public async Task<ActionResult<List<string>>> GetClientNames([FromRoute] char firstinitial)
         {
-            // Retrieve client names and order them alphabetically
+            // Retrieve client names according to their first initial.
             var clientNames = await _context.Clients
+                .Where(c => c.Name.StartsWith(firstinitial.ToString()))
                 .OrderBy(c => c.Name)
                 .Select(c => c.Name)
                 .ToListAsync();
-            // if no clients are found return a 404 Not Found response
+            // if no clients are found, return a 404 Not Found response
+            if (clientNames.Count == 0) 
+                return NotFound();
             return Ok(clientNames);
         }
     }
