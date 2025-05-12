@@ -4,6 +4,8 @@
  * Instructor: Jonathan Cruz
  * Purpose: Final project synthesizing MVC, Web API, EF Core, and middleware
  */
+using COMP003B.SP25.FinalProject.TanM.Data;
+using Microsoft.EntityFrameworkCore;
 namespace COMP003B.SP25.FinalProject.TanM
 {
     public class Program
@@ -14,6 +16,10 @@ namespace COMP003B.SP25.FinalProject.TanM
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Set up the database context.
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer("Name=ConnectionStrings:DefaultConnection"));
 
             var app = builder.Build();
 
