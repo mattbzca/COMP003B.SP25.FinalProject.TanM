@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
 namespace COMP003B.SP25.FinalProject.TanM.Models
 {
     public class Booking
     {
-        public int BookId { get; set; }
+        public int BookingId { get; set; }
 
         [Required]
         [StringLength(200)]
