@@ -22,5 +22,7 @@ namespace COMP003B.SP25.FinalProject.TanM.Models
 
         // Collection navigation property
         public virtual ICollection<Itinerary>? Itinerarys { get; set; }
+
+        public string HomeAddress { get; set; } // New property added
     }
 }
