@@ -25,7 +25,9 @@ namespace COMP003B.SP25.FinalProject.TanM.Controllers
             return Ok(await _context.Clients.ToListAsync());
         }
         // GET: api/clients/{id}, retrieving a specific client by its ID.
-        [HttpGet("{id}")]
+        // Added route constraint {id:int} to enforce integers for client ID's.
+        // Added optional segment {slug?}.
+        [HttpGet("{id:int}/{slug?}")]
         public async Task<ActionResult<Client>> GetClient(int id)
         {
             // Find the client with the specified ID
