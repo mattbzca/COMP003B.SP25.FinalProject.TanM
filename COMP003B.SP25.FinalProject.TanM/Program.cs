@@ -5,6 +5,7 @@
  * Purpose: Final project synthesizing MVC, Web API, EF Core, and middleware
  */
 using COMP003B.SP25.FinalProject.TanM.Data;
+using COMP003B.SP25.FinalProject.TanM.Middleware;
 using Microsoft.EntityFrameworkCore;
 namespace COMP003B.SP25.FinalProject.TanM
 {
@@ -34,7 +35,7 @@ namespace COMP003B.SP25.FinalProject.TanM
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseMiddleware<RequestTimingMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();
