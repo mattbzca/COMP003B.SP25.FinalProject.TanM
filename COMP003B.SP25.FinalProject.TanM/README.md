@@ -24,10 +24,9 @@ For setup:
         "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ApplicationDbContext;Trusted_Connection=True;MultipleActiveResultSets=true"
     }
 	~~~~~~~~~~~~~~~~~~
-	-Secondly, you must restore dependencies, update database, and then run the app using these commands in respective order: 
-		dotnet restore
-		dotnet ef database update
-		dotnet run
+	-Secondly, you must download dependencies, update database, and then run the app using these commands in respective order: 
+		dotnet tool install --global dotnet-ef
+		dotnet ef database update --project "COMP003B.SP25.FinalProject.TanM"
 <!--> Design inspirations and feature descriptions <--!>
 Partial views are used to display cards of the data that are already registered.
 The ApiClientsController is used to test swagger endpoints when redirecting the URL to /swagger.
