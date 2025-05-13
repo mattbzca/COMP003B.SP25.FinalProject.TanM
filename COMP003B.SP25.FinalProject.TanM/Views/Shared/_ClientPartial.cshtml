@@ -1,0 +1,10 @@
+﻿@model Client
+
+<div class="card mb-3"
+	<div class="card-body">
+		<h4 class="card-title">@Model.Name</h4>
+		<p class="card-text">Phone Number: @Model.PhoneNumber</p>
+		<p class="card-text">Email: @Model.Email</p>
+		<a asp-action="Details" asp-route-id="@Model.ClientId" class="btn btn-outline-primary">View Client</a>
+	</div>
+</div>

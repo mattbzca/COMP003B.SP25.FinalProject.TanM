@@ -1,0 +1,10 @@
+﻿@model Place
+
+<div class="card mb-3"
+	<div class="card-body">
+		<h4 class="card-title">@Model.Name</h4>
+		<p class="card-text">Location: @Model.Location</p>
+		<p class="card-text">Description: @Model.Description</p>
+		<a asp-action="Details" asp-route-id="@Model.PlaceId" class="btn btn-outline-primary">View Places</a>
+	</div>
+</div>

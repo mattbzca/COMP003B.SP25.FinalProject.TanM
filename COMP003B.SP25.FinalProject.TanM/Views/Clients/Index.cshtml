@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<COMP003B.SP25.FinalProject.TanM.Models.Client>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Clients";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,29 +32,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeAddress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ClientId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClientId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClientId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeAddress)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ClientId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ClientId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ClientId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<!-- Shows client cards from _ClientPartial partial view with respective unique properties -->
+<h2>View Clients</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <partial name="_ClientPartial" model="item"/>
+        </div>
+    }
+</div>
